@@ -1,0 +1,6 @@
+node_modules/
+.env
+friendzone_data.txt
+.friendzone-chat.json
+.friendzone-chat.json.*.tmp
+npm-debug.log*

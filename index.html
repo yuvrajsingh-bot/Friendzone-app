@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>FriendZone — Campus connections</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body class="auth-pending">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="FriendZone home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M11.2 15.1a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm9.6 0a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8ZM3.9 25.7c0-4.1 3.3-7.4 7.4-7.4h1.4c2.1 0 4.1.9 5.4 2.5a7.3 7.3 0 0 1 5.4-2.5h1.4c4.1 0 7.4 3.3 7.4 7.4v.8H3.9v-.8Z"/></svg>
+        </span>
+        <span>friend<span class="brand-accent">zone</span></span>
+      </a>
+
+      <div class="campus-label">YOUR CAMPUS</div>
+      <button class="campus-card" id="campus-button" type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="campus-icon">✦</span>
+        <span><strong>Campus Connect</strong><small>Student community</small></span>
+        <span class="chevron">⌄</span>
+      </button>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" type="button" data-scroll="overview">
+          <span class="nav-icon">▦</span> Overview
+        </button>
+        <button class="nav-item" type="button" data-scroll="students-section">
+          <span class="nav-icon">♙</span> People <span class="nav-count" id="nav-student-count">0</span>
+        </button>
+        <button class="nav-item hidden" id="rooms-nav-item" type="button" data-scroll="rooms-section">
+          <span class="nav-icon">▧</span> Rooms
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <div class="note-spark">✦</div>
+          <strong>Good ideas grow<br>when we build together.</strong>
+          <span>Meet your next collaborator.</span>
+          <button type="button" class="note-link" data-scroll="rooms-section">Explore rooms <span>→</span></button>
+          <span class="note-art" aria-hidden="true">☺</span>
+        </div>
+        <button class="profile-mini" type="button" data-action="profile" aria-label="Open profile menu">
+          <span class="avatar avatar-you" data-user-avatar>A</span>
+          <span class="profile-copy"><strong data-user-name>Guest</strong><span data-user-caption>Sign in to your account</span></span>
+          <span class="more">···</span>
+        </button>
+        <p class="sidebar-credit">A student project made with care ♡</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="breadcrumb">Community <span>/</span> <strong>Overview</strong></div>
+        <div class="top-actions">
+          <span class="today-label" id="today-label"></span>
+          <button class="icon-button" id="notifications-button" type="button" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">♧<i></i></button>
+          <button class="avatar avatar-top profile-trigger" data-action="profile" type="button" aria-label="Open profile menu" data-user-avatar>A</button>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="welcome-row">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR COMMUNITY, YOUR PEOPLE</p>
+            <h1>Find your <span>people.</span></h1>
+            <p class="welcome-subtitle">Every great campus story starts with a hello.</p>
+          </div>
+        </section>
+
+        <section class="stat-grid" aria-label="Community at a glance">
+          <article class="stat-card">
+            <div class="stat-heading"><span>Campus people</span><span class="stat-icon lavender">♙</span></div>
+            <div class="stat-number" id="student-stat">0</div>
+            <div class="stat-foot"><span class="stat-dot purple-dot"></span> In your community</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-heading"><span>Project rooms</span><span class="stat-icon pink">▧</span></div>
+            <div class="stat-number" id="rooms-stat">0</div>
+            <div class="stat-foot"><span class="stat-dot pink-dot"></span> Ideas in progress</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-heading"><span>Departments</span><span class="stat-icon mint">✳</span></div>
+            <div class="stat-number" id="department-stat">0</div>
+            <div class="stat-foot"><span class="stat-dot green-dot"></span> Areas of study</div>
+          </article>
+          <article class="stat-card stat-highlight">
+            <div class="stat-heading"><span>Campus spirit</span><span class="stat-icon yellow">✦</span></div>
+            <div class="stat-number">100<span class="percent">%</span></div>
+            <div class="stat-foot"><span class="stat-dot yellow-dot"></span> Better together</div>
+            <span class="highlight-decoration" aria-hidden="true">✦</span>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel students-panel" id="students-section">
+            <div class="panel-heading">
+              <div><p class="section-kicker">GET TO KNOW THEM</p><h2>Campus people <span class="heading-count" id="people-count">0</span></h2></div>
+              <button class="text-button" type="button" data-scroll="students-section">View all <span>→</span></button>
+            </div>
+            <div class="student-tools">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input id="search-input" type="search" placeholder="Search by name, department, subject, or skill..." autocomplete="off" aria-label="Search campus people">
+                <kbd>/</kbd>
+              </label>
+              <select id="department-filter" aria-label="Filter by department">
+                <option value="">All departments</option>
+              </select>
+            </div>
+            <div class="student-list" id="student-list" aria-live="polite"></div>
+            <div class="empty-state hidden" id="student-empty">
+              <span>☀</span><strong id="student-empty-title">No campus people yet</strong><p id="student-empty-message">Google members appear here after completing their campus profile.</p>
+            </div>
+          </div>
+
+          <div class="right-column">
+            <section class="panel rooms-panel hidden" id="rooms-section" aria-labelledby="rooms-title">
+              <div class="panel-heading compact-heading">
+                <div><p class="section-kicker">MAKE SOMETHING TOGETHER</p><h2 id="rooms-title">Project rooms</h2></div>
+                <button class="button button-primary" id="create-room-button" type="button">＋ New room</button>
+              </div>
+              <p class="panel-description">Find a group, add ideas to its board, and build together.</p>
+              <div class="room-list" id="room-list" aria-live="polite"></div>
+              <p class="room-empty hidden" id="room-empty">No rooms yet. Start one and invite your campus to contribute.</p>
+              <section class="active-room hidden" id="active-room" aria-labelledby="active-room-title">
+                <div class="active-room-heading">
+                  <div><h3 id="active-room-title"></h3><p id="active-room-description"></p></div>
+                  <div class="active-room-actions"><span id="active-room-members"></span><button class="text-button hidden" id="set-room-password-button" type="button">Set password</button><button class="text-button hidden" id="invite-room-friends-button" type="button">Invite friends</button><button class="text-button" id="leave-room-button" type="button">Leave</button></div>
+                </div>
+                <div class="chat-tabs" role="group" aria-label="Choose a room workspace">
+                  <button class="chat-tab active" id="board-tab" type="button" aria-pressed="true">Idea board</button>
+                  <button class="chat-tab" id="room-chat-tab" type="button" aria-pressed="false">Group chat</button>
+                </div>
+                <section id="room-board" aria-label="Shared idea board">
+                  <div class="board-notes" id="board-notes" aria-live="polite"></div>
+                  <p class="chat-empty" id="board-empty">Add a thought, question, sketch idea, or next step to get started.</p>
+                  <form class="board-form" id="board-form">
+                    <label class="sr-only" for="board-note-input">Add an idea to the shared board</label>
+                    <textarea id="board-note-input" maxlength="500" rows="3" placeholder="Share an idea with your room…" required></textarea>
+                    <div class="board-form-actions">
+                      <label for="board-note-color">Note color</label>
+                      <select id="board-note-color" aria-label="Idea note color"><option value="lavender">Lavender</option><option value="mint">Mint</option><option value="peach">Peach</option></select>
+                      <button class="button button-primary" type="submit">Add idea</button>
+                    </div>
+                  </form>
+                </section>
+                <section class="room-chat hidden" id="room-chat" aria-label="Study room group chat">
+                  <div class="chat-transcript" id="room-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+                  <p class="chat-empty hidden" id="room-chat-empty">Start the conversation with your group.</p>
+                  <form class="chat-form" id="room-chat-form">
+                    <label class="sr-only" for="room-chat-input">Write a message to your group</label>
+                    <input id="room-chat-input" type="text" maxlength="2000" placeholder="Message your room…" autocomplete="off" required>
+                    <button class="button button-primary" type="submit">Send</button>
+                  </form>
+                </section>
+                <p class="chat-status" id="room-status" role="status">Room updates refresh automatically.</p>
+              </div>
+            </section>
+
+            <section class="quote-card">
+              <span class="quote-mark">“</span>
+              <p>Alone we can do so little; together we can do so much.</p>
+              <span class="quote-byline">HELEN KELLER</span>
+              <span class="quote-sun" aria-hidden="true">✳</span>
+            </section>
+          </div>
+        </section>
+        <footer class="page-footer"><span>FRIENDZONE</span><span>Made for a more connected campus <b>♡</b></span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="student-dialog" id="profile-setup-dialog" aria-labelledby="profile-setup-title">
+    <form id="profile-setup-form" class="dialog-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">YOUR CAMPUS PROFILE</p><h2 id="profile-setup-title">Complete your profile</h2></div>
+      </div>
+      <p class="dialog-intro">Share your study areas and skills so campus members can find you.</p>
+      <label for="profile-department">Department</label>
+      <input id="profile-department" name="department" maxlength="80" placeholder="e.g. Computer Science" required>
+      <label for="profile-subjects">Subjects</label>
+      <input id="profile-subjects" name="subjects" maxlength="720" placeholder="e.g. Data Structures, Web Development" required>
+      <p class="form-hint">Separate subjects with commas (up to 12).</p>
+      <label for="profile-skills">Skills</label>
+      <input id="profile-skills" name="skills" maxlength="1200" placeholder="e.g. JavaScript, UI design, research" required>
+      <p class="form-hint">Separate skills with commas (up to 20).</p>
+      <div class="dialog-actions"><button class="button button-quiet hidden" id="cancel-profile-setup" type="button">Cancel</button><button class="button button-primary" id="profile-setup-submit" type="submit">Save profile and continue <span>→</span></button></div>
+    </form>
+  </dialog>
+  <dialog class="student-dialog" id="room-dialog" aria-labelledby="room-dialog-title">
+    <form class="dialog-form" id="room-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">START BUILDING TOGETHER</p><h2 id="room-dialog-title">Create a project room</h2></div>
+        <button class="dialog-close" id="room-dialog-close" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro">Make a space to brainstorm, plan, and share progress.</p>
+      <label for="room-name-input">Room name</label>
+      <input id="room-name-input" name="name" maxlength="60" placeholder="e.g. Campus garden project" required>
+      <label for="room-description-input">What are you working on?</label>
+      <textarea id="room-description-input" name="description" maxlength="240" rows="3" placeholder="A short description to welcome collaborators…"></textarea>
+      <label for="room-password-input">Room password</label>
+      <input id="room-password-input" name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters" required>
+      <p class="form-hint">Only friends you invite can skip this password.</p>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-room-dialog" type="button">Cancel</button><button class="button button-primary" type="submit">Create room <span>→</span></button></div>
+    </form>
+  </dialog>
+  <dialog class="student-dialog" id="join-room-dialog" aria-labelledby="join-room-title">
+    <form class="dialog-form" id="join-room-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">JOIN A PROJECT</p><h2 id="join-room-title">Enter room password</h2></div>
+        <button class="dialog-close" id="join-room-close" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro" id="join-room-description"></p>
+      <label for="join-room-password">Password</label>
+      <input id="join-room-password" name="password" type="password" maxlength="128" autocomplete="current-password" required>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-join-room" type="button">Cancel</button><button class="button button-primary" type="submit">Join room</button></div>
+    </form>
+  </dialog>
+  <dialog class="student-dialog" id="invite-friends-dialog" aria-labelledby="invite-friends-title">
+    <form class="dialog-form" id="invite-friends-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">GROW YOUR ROOM</p><h2 id="invite-friends-title">Invite a friend</h2></div>
+        <button class="dialog-close" id="invite-friends-close" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro">Accepted friends join this room directly without entering its password.</p>
+      <label for="invite-friend-select">Friend</label>
+      <select id="invite-friend-select" name="userId" required><option value="">Loading friends…</option></select>
+      <p class="form-hint hidden" id="invite-friends-empty">All your friends are already in this room.</p>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-invite-friends" type="button">Cancel</button><button class="button button-primary" id="invite-friend-submit" type="submit">Invite to room</button></div>
+    </form>
+  </dialog>
+  <dialog class="student-dialog" id="set-room-password-dialog" aria-labelledby="set-room-password-title">
+    <form class="dialog-form" id="set-room-password-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">ROOM SECURITY</p><h2 id="set-room-password-title">Set room password</h2></div>
+        <button class="dialog-close" id="set-room-password-close" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro">Share the password with people you want to let into this room. Accepted friends can be invited directly.</p>
+      <label for="set-room-password-input">New password</label>
+      <input id="set-room-password-input" name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-set-room-password" type="button">Cancel</button><button class="button button-primary" type="submit">Save password</button></div>
+    </form>
+  </dialog>
+  <dialog class="student-dialog" id="profile-settings-dialog" aria-labelledby="profile-settings-title">
+    <form class="dialog-form" id="profile-settings-form">
+      <div class="dialog-header">
+        <div><p class="section-kicker">YOUR PRIVACY</p><h2 id="profile-settings-title">Profile photo</h2></div>
+        <button class="dialog-close" id="profile-settings-close" type="button" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro">Your Google photo is private by default. Choose whether it appears in study rooms and to campus members.</p>
+      <label class="privacy-choice"><input id="photo-visibility-toggle" type="checkbox"> Show my Google profile photo to signed-in campus members</label>
+      <p class="chat-privacy">Your Google email address is never shown in the member directory.</p>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-profile-settings" type="button">Cancel</button><button class="button button-primary" type="submit">Save setting</button></div>
+    </form>
+  </dialog>
+  <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
+    <div class="auth-content">
+      <button class="dialog-close auth-close" type="button" aria-label="Close sign-in dialog">×</button>
+      <span class="auth-mark" aria-hidden="true">✦</span>
+      <p class="section-kicker">YOUR CAMPUS COMMUNITY</p>
+      <h2 id="auth-title">Welcome to FriendZone</h2>
+      <p class="dialog-intro" id="auth-intro">Sign in to make your campus connections feel like yours.</p>
+      <div id="google-signin-button" class="google-signin-slot"></div>
+      <button class="google-fallback button" id="google-signin" type="button">
+        <svg aria-hidden="true" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.7-.4-4H24v7.6h11a9.4 9.4 0 0 1-4.1 6.2v5h6.7c3.9-3.6 6-8.8 6-14.8Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.8l-6.7-5c-1.8 1.2-4.1 2-6.8 2-5.2 0-9.6-3.5-11.2-8.2H5.9v5.2A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.8 28a12 12 0 0 1 0-7.6v-5.2H5.9a20 20 0 0 0 0 18l6.9-5.2Z"/><path fill="#EA4335" d="M24 12.2c3 0 5.6 1 7.7 3l5.8-5.8C34 6.1 29.5 4 24 4A20 20 0 0 0 5.9 15.2l6.9 5.2c1.6-4.7 6-8.2 11.2-8.2Z"/></svg>
+        Continue with Google
+      </button>
+      <p class="auth-notice" id="auth-notice" role="status">Checking Google sign-in setup…</p>
+      <a class="oauth-setup-link hidden" id="oauth-setup-link" href="https://console.cloud.google.com/auth/clients" target="_blank" rel="noopener noreferrer">Google sign-in setup is free <span>↗</span></a>
+      <div class="auth-divider"><span>OR</span></div>
+      <form id="demo-signin-form" class="demo-signin-form">
+        <label id="demo-form-label" for="demo-name">Create a demo profile on this device</label>
+        <div class="demo-fields">
+          <input id="demo-name" name="name" maxlength="50" placeholder="Your name" autocomplete="name" required>
+          <input id="demo-email" name="email" type="email" maxlength="100" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+        <button class="button button-primary demo-submit" type="submit"><span id="demo-submit-label">Continue with this profile</span> <span>→</span></button>
+      </form>
+      <button class="demo-quick-button" id="demo-quick-login" type="button">Skip setup and explore with a sample profile</button>
+      <p class="auth-disclaimer">A demo profile is just a local preview, not a real Google account or secure sign-in.</p>
+    </div>
+  </dialog>
+  <div class="floating-menu hidden" id="floating-menu" role="menu"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

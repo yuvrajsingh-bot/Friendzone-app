@@ -1,5 +1,6 @@
 "use strict";
 
+if (typeof window !== "undefined") {
 const PROFILE_KEY = "friendzone.profile.v1";
 const avatarColors = [
   ["#f1eaff", "#8063cd"], ["#e5f6f1", "#4a9f85"], ["#fff0e6", "#c57c4f"],
@@ -1171,3 +1172,4 @@ loadServerProfile().then(() => {
     openLoginGate();
   }
 });
+}

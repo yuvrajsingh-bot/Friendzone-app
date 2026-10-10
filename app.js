@@ -32,8 +32,9 @@ const authDialog = $("#auth-dialog");
 const floatingMenu = $("#floating-menu");
 
 function loadProfile() {
+  if (typeof window === "undefined") return null;
   try {
-    const saved = localStorage.getItem(PROFILE_KEY);
+    const saved = window.localStorage.getItem(PROFILE_KEY);
     if (!saved) return null;
     const parsed = JSON.parse(saved);
     return parsed.provider === "demo" && typeof parsed.name === "string" && typeof parsed.email === "string"
@@ -226,8 +227,12 @@ function renderProfile() {
 }
 
 function setDemoProfile(nextProfile) {
+  if (typeof window === "undefined") {
+    console.error("Could not save FriendZone profile: browser storage is unavailable.");
+    return false;
+  }
   try {
-    localStorage.setItem(PROFILE_KEY, JSON.stringify(nextProfile));
+    window.localStorage.setItem(PROFILE_KEY, JSON.stringify(nextProfile));
   } catch (error) {
     console.error("Could not save FriendZone profile:", error);
     showToast("Your browser could not save the profile.");
@@ -245,10 +250,12 @@ function setDemoProfile(nextProfile) {
 }
 
 function setGoogleProfile(nextProfile) {
-  try {
-    localStorage.removeItem(PROFILE_KEY);
-  } catch (error) {
-    console.error("Could not clear the old local demo profile:", error);
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.removeItem(PROFILE_KEY);
+    } catch (error) {
+      console.error("Could not clear the old local demo profile:", error);
+    }
   }
   profile = nextProfile;
   photoVisibleToCampus = Boolean(nextProfile.photoVisibleToCampus);
@@ -1064,7 +1071,9 @@ $("#floating-menu").addEventListener("click", async (event) => {
         });
         if (!response.ok) throw new Error(`Sign-out failed with status ${response.status}.`);
       } else {
-        localStorage.removeItem(PROFILE_KEY);
+        if (typeof window !== "undefined") {
+          window.localStorage.removeItem(PROFILE_KEY);
+        }
       }
       profile = null;
       photoVisibleToCampus = false;
